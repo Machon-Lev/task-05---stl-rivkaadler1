@@ -1,6 +1,7 @@
 #pragma once
 #include "DistanceCalculator.h"
 
+
 /**
  * The ChebyshevDistanceCalculator class is a concrete implementation of the DistanceCalculator class
  * that calculates the Chebyshev distance between two locations.

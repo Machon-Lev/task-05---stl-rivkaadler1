@@ -2,6 +2,7 @@
 #include "Location.h"
 #include <cmath>
 
+
 /**
  * The DistanceCalculator class is an abstract base class that defines an interface for calculating distances
  * between two locations in a two-dimensional space.

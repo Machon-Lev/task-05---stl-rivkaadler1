@@ -1,5 +1,6 @@
 #pragma once
 
+
 /**
  * The Location struct represents a point in a two-dimensional coordinate system.
  * It consists of an x-coordinate and a y-coordinate.

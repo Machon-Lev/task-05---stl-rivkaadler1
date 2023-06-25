@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <set>
 
+
 LocationSearcher::LocationSearcher()
 {
     _distanceCalculators[0] = std::make_unique<EuclideanDistanceCalculator>();

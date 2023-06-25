@@ -1,5 +1,6 @@
 #pragma once
 #include "DistanceCalculator.h"
+
 /**
  * The EuclideanDistanceCalculator class is a concrete implementation of the DistanceCalculator class
  * that calculates the Euclidean distance between two locations.

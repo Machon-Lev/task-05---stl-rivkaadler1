@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LocationSearcher.h"
 
+
 /**
  * The main entry point of the LocationSearcher program.
  * Creates an instance of the LocationSearcher class and runs the location search process.

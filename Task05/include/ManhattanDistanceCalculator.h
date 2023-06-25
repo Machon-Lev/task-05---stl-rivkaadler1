@@ -1,5 +1,6 @@
 #pragma once
 #include "DistanceCalculator.h"
+
 /**
  * The ManhattanDistanceCalculator class is a concrete implementation of the DistanceCalculator class
  * that calculates the Manhattan distance between two locations.
