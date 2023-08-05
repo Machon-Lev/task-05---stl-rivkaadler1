@@ -5,13 +5,20 @@
 #include <algorithm>
 #include <set>
 
-
 LocationSearcher::LocationSearcher()
 {
-    _distanceCalculators[0] = std::make_unique<EuclideanDistanceCalculator>();
-    _distanceCalculators[1] = std::make_unique<ChebyshevDistanceCalculator>();
-    _distanceCalculators[2] = std::make_unique<ManhattanDistanceCalculator>();
+    // Initialize the map with lambda functions for distance calculation
+    _distanceCalculators[0] = [](const Location& loc1, const Location& loc2) {
+        return std::sqrt(std::pow((loc1._x - loc2._x), 2) + std::pow((loc1._y - loc2._y), 2));
+    };
+    _distanceCalculators[1] = [](const Location& loc1, const Location& loc2) {
+        return std::max(std::abs(loc1._x - loc2._x), std::abs(loc1._y - loc2._y));
+    };
+    _distanceCalculators[2] = [](const Location& loc1, const Location& loc2) {
+        return std::abs(loc1._x - loc2._x) + std::abs(loc1._y - loc2._y);
+    };
 }
+
 
 void LocationSearcher::run()
 {
@@ -90,7 +97,9 @@ void LocationSearcher::_processLocationSearchByRadius()
         std::cin >> radius;
         std::cout << "Please enter the desired norm (0 - L2, Euclidean distance, 1 - Linf, Chebyshev distance, 2 - L1, Manhattan distance): ";
         std::cin >> norm;
-        std::unique_ptr<DistanceCalculator>& distanceCalculator = _distanceCalculators[norm];
+        auto distanceCalculator = _distanceCalculators[norm];
+
+
         const Location& selectedLocation = _cityLocationMap[cityName];
 
         std::set<std::string> xRangeCities = _filterCitiesByXRange(selectedLocation, radius);
@@ -103,7 +112,7 @@ void LocationSearcher::_processLocationSearchByRadius()
         matchingCities.erase(std::remove_if(matchingCities.begin(), matchingCities.end(),
             [&](const std::string& city) {
                 const Location& location = _cityLocationMap[city];
-                return (distanceCalculator->calculateDistance(selectedLocation, location) > radius);
+                return (distanceCalculator(selectedLocation, location) > radius);
             }), matchingCities.end());
 
         _printSearchResults(matchingCities, northernCities, radius, norm);

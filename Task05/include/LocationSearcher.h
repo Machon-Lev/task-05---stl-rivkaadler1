@@ -5,10 +5,8 @@
 #include <vector>
 #include <memory>
 #include "Location.h"
-#include "DistanceCalculator.h"
-#include "ChebyshevDistanceCalculator.h"
-#include "EuclideanDistanceCalculator.h"
-#include "ManhattanDistanceCalculator.h"
+#include <functional>
+
 /**
  * LocationSearcher is a class that allows searching for locations based on specific criteria.
  * It reads location data from a file, performs search operations, and provides search results.
@@ -94,6 +92,6 @@ private:
     std::multimap<double, std::string> _xCoordinateMap;                         // Map of x-coordinate to city name
     std::multimap<double, std::string> _yCoordinateMap;                         // Map of y-coordinate to city name
     std::map<std::string, Location> _cityLocationMap;                           // Map of city name to location
-    std::map<int, std::unique_ptr<DistanceCalculator>> _distanceCalculators;    // Map of norm to distance calculator
+    std::map<int, std::function<double(const Location&, const Location&)>> _distanceCalculators;    // Map of norm to distance calculator
 };
 
